@@ -4,16 +4,27 @@ const pizzaController = {
     // GET all pizza
     getAllPizza(req, res) {
         Pizza.find({})
-        .then(dbPizzaData => res.json(dbPizzaData))
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+            .populate({
+                path: 'comments',
+                select: '-_v'
+            })
+            .select('-_v')
+            .sort({ _id: -1 })
+            .then(dbPizzaData => res.json(dbPizzaData))
+            .catch(err => {
+                console.log(err);
+                res.status(400).json(err);
+         });
     },
 
     // GET single pizza w/ ID
     getPizzaById({ params }, res) {
         Pizza.findOne({ _id: params.id })
+        .populate({
+            path: 'comments',
+            select: '-_v'
+        })
+        .select('-_v')
         .then(dbPizzaData => {
             // if no pizza, send err
             if (!dbPizzaData) {
