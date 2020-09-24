@@ -9,7 +9,7 @@ request.onupgradeneeded = function(event) {
     const db = event.target.result;
     // create an object store (table) called `new_pizza`, set it to have an auto incrementing primary key of sorts 
     db.createObjectStore('new_pizza', { autoIncrement: true });
-};
+  };
 
 // upon a successful 
 request.onsuccess = function(event) {
@@ -21,7 +21,7 @@ request.onsuccess = function(event) {
       // we haven't created this yet, but we will soon, so let's comment it out for now
       // uploadPizza();
     }
-  };
+};
 
 request.onerror = function(event) {
     // log error here
@@ -35,7 +35,7 @@ function saveRecord(record) {
   
     // access the object store for `new_pizza`
     const pizzaObjectStore = transaction.objectStore('new_pizza');
-  
+  console.log(record);
     // add record to your store with add method
     pizzaObjectStore.add(record);
   }
