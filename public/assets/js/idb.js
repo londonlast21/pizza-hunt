@@ -22,11 +22,6 @@ request.onsuccess = function(event) {
       // uploadPizza();
     }
   };
-  
-  request.onerror = function(event) {
-    // log error here
-    console.log(event.target.errorCode);
-  };
 
 request.onerror = function(event) {
     // log error here
